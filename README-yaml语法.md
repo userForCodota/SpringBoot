@@ -136,3 +136,62 @@ public class Person {
     //省略其他属性
 }
 ```
+
+## 四、多环境配置
+
+### 4.1多路径存放文件实现多环境配置
+
+yml文件可以放在什么地方？根据官方文档，有四个位置(优先级从上往下)：
+`项目路径下\config\application.yml`
+`项目路径下的application.yml`
+`\src\main\resources\config\application.yml`
+`\src\main\resources\application.yml`
+
+![yml文件可以放的位置.png]()
+
+小结：
+
+**SpringBoot给我们默认配置了优先级最低的yml文件，实际上是方面后期外部添加的yml文件能覆盖其他的从而达到更高的优先级**
+
+### 4.2不同的文件后缀方式实现多环境配置
+
+以上就是同名yml文件（application.yml）的覆盖达到多环境的目的。那么如果是`\src\main\resources\application.yml`的同级下呢？此时我们可以创建过个文件：
+
+`\src\main\resources\application.yml`     ——server.port=9001
+
+`\src\main\resources\application-test.yml`——假设测试环境希望使用这个文件,server.port=9002
+
+`\src\main\resources\application-dev.yml` ——开发环境希望使用这个文件,server.port=9003
+
+那么问题就是：我们如何切换？此时只需要在我们的`\src\main\resources\application.yml`下配置多环境参数即可：
+```
+spring:
+  profiles:
+    active: dev
+```
+
+如果是properties文件则类推：`spring.profiles.active=dev`,通过启动主启动类查看tomcat端口就能轻松测试出。
+
+### 4.3同一个yml文件实现多环境配置
+
+yml远不止以上的方法，甚至可以在同一个文件中实现多环境配置，关键是用符号是`---`间隔开：
+```
+server:
+  port: 9001
+spring:
+  profiles:
+    active: dev #修改这个参数就能轻松切换环境
+
+---
+server:
+  port: 9002
+spring:
+  profiles: dev
+
+---
+server:
+  port: 9003
+spring:
+  profiles: test
+  
+```

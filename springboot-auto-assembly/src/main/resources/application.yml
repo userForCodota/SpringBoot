@@ -1,2 +1,20 @@
 server:
-  port: 6780
+  port: 9001
+
+spring:
+  profiles:
+    active: dev
+
+
+
+
+
+
+
+
+
+
+
+
+
+

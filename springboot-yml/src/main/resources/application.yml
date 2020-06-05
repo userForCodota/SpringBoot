@@ -1,0 +1,18 @@
+server:
+  port: 9001
+spring:
+  profiles:
+    active: dev # 修改这个参数就能轻松切换环境
+
+
+---
+server:
+  port: 9002
+spring:
+  profiles: dev
+
+---
+server:
+  port: 9003
+spring:
+  profiles: test
