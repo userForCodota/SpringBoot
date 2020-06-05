@@ -2,7 +2,8 @@
 
 [(返回主目录)](https://github.com/MajorTooooom/SpringBoot)
 
-对比xml文件，yml也具备属性文件的功能，但远不如此简单，yaml的功能非常强大。在module：`springboot-yaml`内建立`application.properties`和`application.yml`两个文件进行对比。
+对比xml文件，yml也具备属性文件的功能，但远不如此简单，yaml的功能非常强大。
+下面我们在module：`springboot-yaml`内建立`application.properties`和`application.yml`两个文件进行对比。
 
 ### yml文件存普通的key-value
 
@@ -79,7 +80,7 @@ person:
     name: 旺财
     age: 3
 ```
-然后在Person类中添加注解**`@ConfigurationProperties(prefix = "")`**:
+然后在Person类中添加注解 `@ConfigurationProperties(prefix = "")`:
 ```
 @ConfigurationProperties(prefix = "person")
 public class Person {
@@ -106,8 +107,6 @@ public class Person {
 ```
 Person(name=多罗罗丶, age=29, happy=false, birth=Thu Jun 04 00:00:00 CST 2020, map={k1=v1, k2=v2}, list=[code, music, girl], dog=Dog(name=旺财, age=3))
 ```
-
-拓展：![properties导致乱码问题解决方法](https://github.com/MajorTooooom/SpringBoot/blob/master/springboot-api/src/main/resources/static/images/properties%E6%96%87%E4%BB%B6%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.png)
 
 ## 三、JSR303校验
 
@@ -147,11 +146,11 @@ yml文件可以放在什么地方？根据官方文档，有四个位置(优先�
 3. `\src\main\resources\config\application.yml`
 4. `\src\main\resources\application.yml`
 
-![yml文件可以放的位置.png]()
+![yml文件可以放的位置.png](https://github.com/MajorTooooom/SpringBoot/blob/master/images/yml%E6%96%87%E4%BB%B6%E5%8F%AF%E4%BB%A5%E6%94%BE%E7%9A%84%E4%BD%8D%E7%BD%AE.png)
 
 小结：
 
-**SpringBoot给我们默认配置了优先级最低的yml文件，实际上是方面后期外部添加的yml文件能覆盖其他的从而达到更高的优先级**
+**可以看出SpringBoot给我们默认配置了优先级最低的yml文件，实际上是方面后期外部添加的yml文件能覆盖其他的从而达到更高的优先级**
 
 ### 4.2不同的文件后缀方式实现多环境配置
 
@@ -195,6 +194,3 @@ spring:
   profiles: test
   
 ```
-
-测试：
-[## 二、yaml语法详解](##-二、yaml语法详解)

@@ -91,9 +91,22 @@ selectImports()
 
 
 -------------------------------------------------------------------------------
+### 找到配置类后如何赋值
+
+到目前为止，我们知道SpringBoot的思路是将之前的xml文件变成了一个个javaConfig类，但是他是如何赋值的呢？之前的xml做法是(引入并)读取对应的properties文件，比如`jdbc.xml`读取的是`jdbc.properties`里面的属性，
+![xml是如何读取properties文件的.png]()
+现在换成了javaConfig类之后，按照逻辑应该也是去读yml文件或者properties文件的，那么我们就要知道yml（或者properties）文件的属性是如何被读取的了，这个知识点在[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yaml%E8%AF%AD%E6%B3%95.md)中有详细说明，
+顺着这个思路我们去找找
+
+
+
+
+-------------------------------------------------------------------------------
+
 # 其他板块
 
 | 板块名称  | 板块地址 | 板块说明    | 其他  |
 |-------|:---:|-----------|-------|
-| yaml语法详解  |[path_yaml语法.md]()  | yml是如何存属性和取出属性的     |  |
-| JSR303校验  |[path_JSR303校验.md]()  |      |  |
+| yaml语法详解  |[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yml%E8%AF%AD%E6%B3%95.md)  | yml存储属性的多种方式；<br/>yml文件的属性是如何被取出来的;<br/>如何配置多环境；<br/>JSR303校验了解；     |  |
+|||||
+
