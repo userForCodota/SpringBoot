@@ -40,7 +40,7 @@ pets: [cat,dog,pig]
 
 #### 如何将yml中的属性值赋给具体的对象
 
-测试方法：在module`springboot-yml`中创建类`pojo.dog`并添加`@Component`注解，使其会被扫描到，再创建一个`Person`类，目的是将dog注入到person中。
+测试方法：模块`springboot-yml`中创建类`pojo.dog`并添加`@Component`注解，使其会被扫描到，再创建一个`Person`类，目的是将dog注入到person中。
 按照老Spring的做法是直接在dog的属性上添加`@value()`注解，比如：
 ```
 public class Dog {
@@ -79,7 +79,7 @@ person:
     name: 旺财
     age: 3
 ```
-然后在Person类中添加注解`@ConfigurationProperties(prefix = "")`:
+然后在Person类中添加注解**`@ConfigurationProperties(prefix = "")`**:
 ```
 @ConfigurationProperties(prefix = "person")
 public class Person {
@@ -142,10 +142,10 @@ public class Person {
 ### 4.1多路径存放文件实现多环境配置
 
 yml文件可以放在什么地方？根据官方文档，有四个位置(优先级从上往下)：
-`项目路径下\config\application.yml`
-`项目路径下的application.yml`
-`\src\main\resources\config\application.yml`
-`\src\main\resources\application.yml`
+1. `项目路径下\config\application.yml`
+2. `项目路径下的application.yml`
+3. `\src\main\resources\config\application.yml`
+4. `\src\main\resources\application.yml`
 
 ![yml文件可以放的位置.png]()
 
@@ -155,7 +155,7 @@ yml文件可以放在什么地方？根据官方文档，有四个位置(优先�
 
 ### 4.2不同的文件后缀方式实现多环境配置
 
-以上就是同名yml文件（application.yml）的覆盖达到多环境的目的。那么如果是`\src\main\resources\application.yml`的同级下呢？此时我们可以创建过个文件：
+以上就是同名yml文件（application.yml）的覆盖达到多环境的目的。那么如果是`\src\main\resources\application.yml`的同级下呢？此时我们可以创建多个文件：
 
 `\src\main\resources\application.yml`     ——server.port=9001
 
@@ -170,7 +170,7 @@ spring:
     active: dev
 ```
 
-如果是properties文件则类推：`spring.profiles.active=dev`,通过启动主启动类查看tomcat端口就能轻松测试出。
+通过启动主启动类查看tomcat端口就能轻松测试出。(如果是properties文件则类推：`spring.profiles.active=dev`,其他步骤相同)
 
 ### 4.3同一个yml文件实现多环境配置
 
@@ -195,3 +195,6 @@ spring:
   profiles: test
   
 ```
+
+测试：
+[ces](#二、yaml语法详解)
