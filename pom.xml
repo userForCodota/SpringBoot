@@ -7,6 +7,5 @@
     <groupId>com.chengfeng</groupId>
     <artifactId>SpringBoot</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-
+    <description>本SpringBoot项目作为父工程方便git同步，其他module均采用SpringBoot构建项目方便测试</description>
 </project>
