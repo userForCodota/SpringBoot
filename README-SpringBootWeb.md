@@ -57,14 +57,44 @@
 
 ## SpringMVC配置原理
 
-查阅官方文档的说明，如果想扩展MVC的配置，那么我们只需要配置一个配置类并且类型为**WebMvcConfigurer**，它是一个接口我们实现它即可；这里我们以模块`SpringMVC配置原理`下的`springboot-web\src\main\java\com\data\config\MyMvcConfig.java`为例子进行测试：
+查阅官方文档的说明，如果想扩展MVC的配置，那么我们只需要配置一个配置类并且类型为**WebMvcConfigurer**，那么它就具备了原生自动配置类**WebMvcAutoConfiguration**的功能，
+它是一个接口我们实现它即可；这里我们以模块`SpringMVC配置原理`下的`springboot-web\src\main\java\com\data\config\MyMvcConfig.java`为例子进行测试：
 
 ```
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
-    //重写的内容就是我们想要自定义的内容
+    //...........
 }
 ```
+**这个`MyMvcConfig`类下面的@bean都会被识别成springWeb-mvc需要的bean**，那么我们看看`WebMvcAutoConfiguration`一般用到哪些bean，比如视图解析器：
 
-    
+```
+		@Bean
+		@ConditionalOnMissingBean
+		public InternalResourceViewResolver defaultViewResolver() {}
+```
+
+那么我们尝试自定义一个视图解释器交给**MyMvcConfig**，它就会帮我们交给SpringBoot：
+
+```
+/**
+ * 按照官网文档，一个类实现WebMvcConfigurer接口，就能扩展SpringMVC的配置，所以此类是一个自动配置类，通过重写对应的方法实现对应的组件
+ */
+@Configuration
+public class MyMvcConfig implements WebMvcConfigurer {
+    @Bean
+    public ViewResolver MyViewResolver() {
+        return new MyViewResolver();
+    }
+
+    //假设我们需要把MyViewResolver这个自定义的视图解释器交给SpringBoot
+    //这里把类写成匿名内部类方便我们看
+    public static class MyViewResolver implements ViewResolver {
+        @Override
+        public View resolveViewName(String viewName, Locale locale) throws Exception {
+            return null;
+        }
+    }
+}
+```
 
