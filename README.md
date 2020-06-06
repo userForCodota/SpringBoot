@@ -94,11 +94,15 @@ selectImports()
 -------------------------------------------------------------------------------
 ### 找到配置类后如何赋值
 
-**首先一图了解**
+**首先一图了解** (*拼图导致字体较小的情况可下载原图查看*)
 
 ![找到配置类后如何赋值思路](https://github.com/MajorTooooom/SpringBoot/blob/master/images/%E6%89%BE%E5%88%B0%E9%85%8D%E7%BD%AE%E7%B1%BB%E5%90%8E%E5%A6%82%E4%BD%95%E8%B5%8B%E5%80%BC.png)
 
-例子图参考[找到配置类后如何赋值-实例详解](https://github.com/MajorTooooom/SpringBoot/blob/master/images/%E6%89%BE%E5%88%B0%E9%85%8D%E7%BD%AE%E7%B1%BB%E5%90%8E%E5%A6%82%E4%BD%95%E8%B5%8B%E5%80%BC-%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3.png)
+详细的示例图参考
+
+![找到配置类后如何赋值-实例详解](https://github.com/MajorTooooom/SpringBoot/blob/master/images/%E6%89%BE%E5%88%B0%E9%85%8D%E7%BD%AE%E7%B1%BB%E5%90%8E%E5%A6%82%E4%BD%95%E8%B5%8B%E5%80%BC-%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3.png)
+
+`下面是思路`：
 
 到目前为止，我们知道SpringBoot的思路是将之前的xml文件变成了一个个javaConfig类，但是他是如何赋值的呢？之前的xml做法是(引入并)读取对应的properties文件，比如`jdbc.xml`读取的是`jdbc.properties`里面的属性，
 
