@@ -94,12 +94,53 @@ selectImports()
 ### 找到配置类后如何赋值
 
 到目前为止，我们知道SpringBoot的思路是将之前的xml文件变成了一个个javaConfig类，但是他是如何赋值的呢？之前的xml做法是(引入并)读取对应的properties文件，比如`jdbc.xml`读取的是`jdbc.properties`里面的属性，
+
 ![xml是如何读取properties文件的.png]()
+
 现在换成了javaConfig类之后，按照逻辑应该也是去读yml文件或者properties文件的，那么我们就要知道yml（或者properties）文件的属性是如何被读取的了，这个知识点在[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yaml%E8%AF%AD%E6%B3%95.md)中有详细说明，
-顺着这个思路我们去找找
+顺着这个思路我们猜测一个`XXXXXAutoConfiguration.java`必然对应一个`XXXproperties`类，它告诉了我们配置类需要哪些属性，为了验证，我们去找到`spring-boot-autoconfigure-2.3.0.RELEASE.jar/META-INF/spring.factories`下的某个`XXXXXAutoConfiguration.java`，看看什么情况，这里我们找到一个简单的`HttpEncodingAutoConfiguration`来查看：
 
+```
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(ServerProperties.class)
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@ConditionalOnClass(CharacterEncodingFilter.class)
+@ConditionalOnProperty(prefix = "server.servlet.encoding", value = "enabled", matchIfMissing = true)
+public class HttpEncodingAutoConfiguration {
+            //  省略主题内容
+}
+```
 
+这里可以留意到`@EnableConfigurationProperties(ServerProperties.class)`传了`ServerProperties.class`这个类，点进去发现`ServerProperties`的属性就是`HttpEncodingAutoConfiguration`需要用的属性，而`ServerProperties.java`是被`@ConfigurationProperties(prefix = "server", ignoreUnknownFields = true)`注解修饰的，这个就是我们熟悉的知识点了，
+我们知道它的作用是将yml(/properties)文件中地方属性读取出来，根据名字对应绑定的，至此，我们逆向思维得出了SpringBoot设计大体的思路就是：
 
+1. 现在我们要使用某个组件，比如就是`HttpEncodingAutoConfiguration`，我们希望将encoding都设置成UTF-8；
+2. 之前是xml导入properties文件，现在`HttpEncodingAutoConfiguration`利用注解导入了`ServerProperties.java`文件；
+3. `ServerProperties.java`文件由`@ConfigurationProperties(prefix = "server", ignoreUnknownFields = true)`注解修饰，使得`ServerProperties.java`能读取到yml配置的属性值，也是就我们自己写的值；
+4. 至此，`ServerProperties.java`+`yml`=`properties`，传递给`javaConfig`（也就是之前的`xml`）;
+
+另外我们还看到`XXXXAutoConfiguration`类被三个`@ConditionalOnXXXX.....`注解进行修饰，他们的作用是判断这个`XXXXAutoConfiguration`配置类在什么情况下进行生效，
+
+```
+@ConditionalOnWebApplication()  ------------------------是否在应用层面满足对应条件？不满足则此配置类不生效
+@ConditionalOnClass()           ------------------------是否在类层面满足对应条件？  不满足则此配置类不生效
+@ConditionalOnProperty()        ------------------------是否在属性层面满足对应条件？不满足则此配置类不生效
+
+    >>>>>>>>>>>以上三个条件都满足才生效
+```
+
+在看回`HttpEncodingAutoConfiguration`就很好理解：
+```
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)                          ---程序类型是web才生效
+@ConditionalOnClass(CharacterEncodingFilter.class)                                                     ---是否存在CharacterEncodingFilter.java不存在则此配置类不生效
+@ConditionalOnProperty(prefix = "server.servlet.encoding", value = "enabled", matchIfMissing = true)   ---配置文件(yml)中是否能读取到对应的属性和属性值？没有的话这个配置类也不生效
+public class HttpEncodingAutoConfiguration {
+    //  省略主题内容
+}
+```
+([@ConditionalOnXXX的扩展可以看这里](https://cloud.tencent.com/developer/article/1490442))
+
+**至此，我们对SpringBoot的自动装配有了加深的了解，了解原理不单是面试时候的作用，对我们日常工作开发更是事半功倍的作用**
 
 -------------------------------------------------------------------------------
 

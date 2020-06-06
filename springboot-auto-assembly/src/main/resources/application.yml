@@ -1,10 +1,11 @@
 server:
   port: 9001
+  tomcat:
+    uri-encoding: UTF-8
 
 spring:
   profiles:
     active: dev
-
 
 
 
