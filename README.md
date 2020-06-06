@@ -94,9 +94,15 @@ selectImports()
 -------------------------------------------------------------------------------
 ### 找到配置类后如何赋值
 
+**首先一图了解**
+
+![找到配置类后如何赋值思路]()
+
+例子图参考[找到配置类后如何赋值-实例详解]()
+
 到目前为止，我们知道SpringBoot的思路是将之前的xml文件变成了一个个javaConfig类，但是他是如何赋值的呢？之前的xml做法是(引入并)读取对应的properties文件，比如`jdbc.xml`读取的是`jdbc.properties`里面的属性，
 
-![xml是如何读取properties文件的.png]()
+![xml是如何读取properties文件的.png](https://github.com/MajorTooooom/SpringBoot/blob/master/images/xml%E6%98%AF%E5%A6%82%E4%BD%95%E8%AF%BB%E5%8F%96properties%E6%96%87%E4%BB%B6%E7%9A%84.png)
 
 现在换成了javaConfig类之后，按照逻辑应该也是去读yml文件或者properties文件的，那么我们就要知道yml（或者properties）文件的属性是如何被读取的了，这个知识点在[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yaml%E8%AF%AD%E6%B3%95.md)中有详细说明，
 顺着这个思路我们猜测一个`XXXXXAutoConfiguration.java`必然对应一个`XXXproperties`类，它告诉了我们配置类需要哪些属性，为了验证，我们去找到`spring-boot-autoconfigure-2.3.0.RELEASE.jar/META-INF/spring.factories`下的某个`XXXXXAutoConfiguration.java`，看看什么情况，这里我们找到一个简单的`HttpEncodingAutoConfiguration`来查看：
