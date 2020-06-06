@@ -167,6 +167,6 @@ public class HttpEncodingAutoConfiguration {
 
 | 板块名称  | 板块地址 | 板块说明    | 其他  |
 |-------|:---:|-----------|-------|
-| yaml语法详解  |[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yml%E8%AF%AD%E6%B3%95.md)  | yml存储属性的多种方式；<br/>yml文件的属性是如何被取出来的;<br/>如何配置多环境；<br/>JSR303校验了解；     |  |
+| yaml语法详解  |[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yml%E8%AF%AD%E6%B3%95.md)  | yml存储属性的多种方式；<br/>yml文件的属性是如何被取出来的;<br/>properties文件的属性是如何被出去来的；<br/>如何配置多环境；<br/>JSR303校验了解；     |  |
 |||||
 

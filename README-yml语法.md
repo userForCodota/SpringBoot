@@ -107,6 +107,11 @@ public class Person {
 ```
 Person(name=多罗罗丶, age=29, happy=false, birth=Thu Jun 04 00:00:00 CST 2020, map={k1=v1, k2=v2}, list=[code, music, girl], dog=Dog(name=旺财, age=3))
 ```
+#### 如何将properties中的属性值赋给具体的对象
+
+
+
+
 
 ## 三、JSR303校验
 
@@ -194,3 +199,7 @@ spring:
   profiles: test
   
 ```
+
+
+## 其他
+debug=true可以开启测试模式，查看哪些自动配置类是否生效
