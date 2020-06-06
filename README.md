@@ -1,7 +1,8 @@
 # SpringBoot
 <space><space><space><space>springboot详解
 
-先说结论（参考了很详细的博客[《Spring Boot面试杀手锏————自动配置原理》](https://blog.csdn.net/u014745069/article/details/83820511)）：
+
+先说结论：
 ```
 Spring Boot启动的时候会通过@EnableAutoConfiguration注解找到META-INF/spring.factories配置文件中的所有自动配置类，（但是不一定生效）并对其进行加载，
 而这些自动配置类都是以AutoConfiguration结尾来命名的，它实际上就是一个JavaConfig形式的Spring容器配置类，它能通过以Properties结尾
@@ -142,7 +143,15 @@ public class HttpEncodingAutoConfiguration {
 
 **至此，我们对SpringBoot的自动装配有了加深的了解，了解原理不单是面试时候的作用，对我们日常工作开发更是事半功倍的作用**
 
+>作为Spring Boot的精髓，自动配置原理的工作过程往往只有在“面试”的时候才能用得上，但是如果在工作中你能够深入的理解Spring Boot的自动配置原理，将无往不利。
+
 -------------------------------------------------------------------------------
+
+以上笔记参考了博客[《Spring Boot面试杀手锏————自动配置原理》](https://blog.csdn.net/u014745069/article/details/83820511)）,参考视频：[【狂神说Java】](https://www.bilibili.com/video/BV1PE411i7CV)，
+结合了前辈们的经验总结出的个人的学习过程的理解。
+
+-------------------------------------------------------------------------------
+
 
 # 其他板块
 
