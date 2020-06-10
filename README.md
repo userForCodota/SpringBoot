@@ -1,5 +1,8 @@
 # SpringBoot
-<space><space><space><space>springboot详解
+
+说明：本项目是springboot学习笔记。
+
+- [x] 本文档（README.md）主要是为了详细理解SpringBoot自动装配原理，其他关于SpringBoot的内容在另外的md文件再展开。
 
 
 先说结论：
@@ -140,6 +143,7 @@ public class HttpEncodingAutoConfiguration {
 ```
 
 在看回`HttpEncodingAutoConfiguration`就很好理解：
+
 ```
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)                          ---程序类型是web才生效
 @ConditionalOnClass(CharacterEncodingFilter.class)                                                     ---是否存在CharacterEncodingFilter.java不存在则此配置类不生效
@@ -169,6 +173,4 @@ public class HttpEncodingAutoConfiguration {
 | yaml语法详解  |[README-yml语法.md](https://github.com/MajorTooooom/SpringBoot/blob/master/README-yml%E8%AF%AD%E6%B3%95.md)  | yml存储属性的多种方式；<br/>yml文件的属性是如何被取出来的;<br/>properties文件的属性是如何被出去来的；<br/>如何配置多环境；<br/>JSR303校验了解；     |  |
 |SpringBoot开发web项目的基本注意事项|[README-SpringBootWeb.md](doc-开发Web项目需要解决的问题.md)|1)静态资源问题;<br/>2)首页如何放置;<br/>3)SpringMVC配置原理;<br/>4)||
 
-finally
 
-![](https://raw.githubusercontent.com/MajorTooooom/markdownImages/master/img/20200607122948.gif)

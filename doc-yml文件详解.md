@@ -80,7 +80,8 @@ person:
     name: 旺财
     age: 3
 ```
-然后在Person类中添加注解 `@ConfigurationProperties(prefix = "")`:
+然后在Person类中添加注解 **@ConfigurationProperties(prefix = "")**
+
 ```
 @ConfigurationProperties(prefix = "person")
 public class Person {
