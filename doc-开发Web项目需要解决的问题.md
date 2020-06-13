@@ -36,10 +36,10 @@
 ![静态资源目录的位置和优先级](https://github.com/MajorTooooom/SpringBoot/blob/master/images/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9B%AE%E5%BD%95%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%92%8C%E4%BC%98%E5%85%88%E7%BA%A7.png)
 
  ## 首页和图标定制
- 
+
  ### 首页如何放置
  **思路**
- 
+
 没有了`web.xml`后是由`WebMvcAutoConfiguration`来接管关于web的配置的，所以理论上也是去`WebMvcAutoConfiguration`找关于首页配置的内容，查看源码发现`welcomePageHandlerMapping()`方法说明了
 在`/**`目录下去找**index.html**，所以我们只要把首页放在对应的位置即可，一般是放在`public`目录下。
 
@@ -98,3 +98,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
 }
 ```
 
+## 如何添加Servlet
+
+因为SpringBoot内置了Servlet容器使得没有了web.xml文件，那么如何我们任然想自定义一个Servlet呢？SpringBoot提供了**ServletRegistrationBean**类进行使用。
+
+在一个@Configuration类中写一个返回值是ServletRegistrationBean的方法，并将其@Bean注入到Spring中即可，具体的内容写在方法体里面；

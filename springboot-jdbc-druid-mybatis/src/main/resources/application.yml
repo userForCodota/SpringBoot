@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/academic_research?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #\u5F53\u7528SpringBoot\u6765\u7BA1\u7406 datasource\u65F6\uFF0C\u53EA\u9700\u8981\u5C06\u6570\u636E\u6E90\u7684\u7C7B\u578B\u6307\u5B9A\u4E3A\u76EE\u6807\u6846\u67B6\uFF08\u6BD4\u5982Druid\uFF09\u5373\u53EF
+    type: com.alibaba.druid.pool.DruidDataSource
+#    filters: stat
+mybatis:
+  type-aliases-package: com.data.mapper
+  mapper-locations: classpath:mybatis/mapper/*.xml

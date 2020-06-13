@@ -5,6 +5,13 @@
     <title>首页</title>
 </head>
 <body>
-<p th:text="${msg}">测试</p>
+<!--读取文本-->
+<p th:text="${text}">当没有传值的时候将显示这些文字</p>
+<!--转义，识别成html-->
+<p th:utext="${utext}">当没有传值的时候将显示这些文字</p>
+<!--遍历数据-->
+<div>
+    <p th:each="user:${list}" th:text="${user}"></p>
+</div>
 </body>
 </html>
