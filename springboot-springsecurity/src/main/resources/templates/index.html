@@ -20,23 +20,23 @@
         <div sec:authorize="isAuthenticated()">
             <p>用户名：
                 <span sec:authentication="name"></span>
-                <span sec:authentication="principal.getAuthorities()"></span>
                 <a th:href="@{'/logout'}"><i></i>登出</a>
             </p>
         </div>
-        <ul>
+        <!--sec:authorize="hasRole('vip1')"的意思是具有XXX权限的时候，元素才展示-->
+        <ul sec:authorize="hasRole('vip1')">
             <li><a th:href="@{'/level1/1'}">跳转至：level-1-1</a></li>
             <li><a th:href="@{'/level1/2'}">跳转至：level-1-2</a></li>
             <li><a th:href="@{'/level1/3'}">跳转至：level-1-3</a></li>
         </ul>
         <br/>
-        <ul>
+        <ul sec:authorize="hasRole('vip2')">
             <li><a th:href="@{'/level2/1'}">跳转至：level-2-1</a></li>
             <li><a th:href="@{'/level2/2'}">跳转至：level-2-2</a></li>
             <li><a th:href="@{'/level2/3'}">跳转至：level-2-3</a></li>
         </ul>
         <br/>
-        <ul>
+        <ul sec:authorize="hasRole('vip3')">
             <li><a th:href="@{'/level3/1'}">跳转至：level-3-1</a></li>
             <li><a th:href="@{'/level3/2'}">跳转至：level-3-2</a></li>
             <li><a th:href="@{'/level3/3'}">跳转至：level-3-3</a></li>
