@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <meta charset="UTF-8">
+        <title>首页</title>
+        <link rel="stylesheet" href="../static/framework/font-awesome-4.7.0/css/font-awesome.css">
+    </head>
+    <body>
+        <p>这是首页</p>
+        <p>规则设定：具备对应的角色“vip1”、“vip2”、“vip3”才能访问对应的页面</p>
+        <p>等级：vip1 < vip2 < vip3</p>
+        <p>guest:vip1</p>
+        <p>chengfeng：vip1~2</p>
+        <p>root:vip1~3</p>
+        <!--isAuthenticated:判断是否已认证-->
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{'/login'}"><i class="fa fa-2x fa-address-book"></i>登录</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <p>用户名：
+                <span sec:authentication="name"></span>
+                <span sec:authentication="principal.getAuthorities()"></span>
+                <a th:href="@{'/logout'}"><i></i>登出</a>
+            </p>
+        </div>
+        <ul>
+            <li><a th:href="@{'/level1/1'}">跳转至：level-1-1</a></li>
+            <li><a th:href="@{'/level1/2'}">跳转至：level-1-2</a></li>
+            <li><a th:href="@{'/level1/3'}">跳转至：level-1-3</a></li>
+        </ul>
+        <br/>
+        <ul>
+            <li><a th:href="@{'/level2/1'}">跳转至：level-2-1</a></li>
+            <li><a th:href="@{'/level2/2'}">跳转至：level-2-2</a></li>
+            <li><a th:href="@{'/level2/3'}">跳转至：level-2-3</a></li>
+        </ul>
+        <br/>
+        <ul>
+            <li><a th:href="@{'/level3/1'}">跳转至：level-3-1</a></li>
+            <li><a th:href="@{'/level3/2'}">跳转至：level-3-2</a></li>
+            <li><a th:href="@{'/level3/3'}">跳转至：level-3-3</a></li>
+        </ul>
+    </body>
+</html>

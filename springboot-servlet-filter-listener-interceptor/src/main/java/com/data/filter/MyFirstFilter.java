@@ -13,7 +13,7 @@ import java.io.IOException;
 public class MyFirstFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        System.out.println("初始化过滤器" + this.getClass().getName() + ".............");
     }
 
     @Override
@@ -25,6 +25,7 @@ public class MyFirstFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        System.out.println("销毁过滤器" + this.getClass().getName() + "...............");
     }
+
 }
