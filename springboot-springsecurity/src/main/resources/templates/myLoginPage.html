@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <meta charset="UTF-8">
+        <title>自定义登录页</title>
+    </head>
+    <body>
+        <h1>自定义登录页</h1>
+        <form th:action="@{/login}" method="post">
+            <input id="user" name="user" type="text" value="" placeholder="请输入账号">
+            <input id="password" name="pwd" type="text" value="" placeholder="请输入密码">
+            <input type="checkbox" name="rememberMeMark">记住我
+            <input type="submit" value="提交">
+        </form>
+    </body>
+</html>

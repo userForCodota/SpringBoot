@@ -23,7 +23,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/level3/**").hasRole("vip3")//对指定的请求添加角色要求
         ;
         /*******************************************************************************************************/
-        http.formLogin();//配置首页，如果无权限的话会跳转到它写好的首页里面去
+        http
+                .formLogin()//配置首页，如果无权限的话会跳转到它写好的首页里面去
+                .loginPage("/toMyLoginPage")//定制登录页：使用我们自己写的登录页，不使用SpringSecurity提供的；这里传参类型是请求url，就是前端页面请求的那个
+                .usernameParameter("user")
+                .passwordParameter("pwd")
+                .loginProcessingUrl("/login")//登录处理网址
+        ;
         /*******************************************************************************************************/
         //配置注销页
         http
@@ -36,7 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //测试过程发现SpringBoot默认开启CSRF防攻击（作用可能是防止get请求），这里是开发阶段先把他关掉
         http.csrf().disable();
         /*******************************************************************************************************/
-        http.rememberMe();//在登录页开启“记住我”的功能（cookies实现）
+        http
+                .rememberMe()//在登录页开启“记住我”的功能（cookies实现）
+                .rememberMeParameter("rememberMeMark")//接收前端参数
+        ;
         /*******************************************************************************************************/
         //super.configure(http);
     }
